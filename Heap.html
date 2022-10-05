@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+<script>
+	
+
+					const decimalToBinary = (inpt) => {
+  const stack = new Stack();
+
+  let result = '';
+  
+  while (inpt > 0){ 
+    stack.push(inpt % 2); 
+    inpt = Math.floor(inpt / 2); 
+  }
+  
+  while (stack.top > 0){ 
+    result += stack.pop();
+  }
+
+  return result;
+}
+
+
+	
+</script>
+</body>
+</html>

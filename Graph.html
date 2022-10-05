@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+<script>
+	/* Graphs: Breadth-first search */
+
+function bfs(graph, root) {
+	//used to store the distances to the root node
+  var nodesLen = {};
+  
+  for (var i = 0; i < graph.length; i++) {
+    nodesLen[i] = Infinity;
+  }
+  nodesLen[root] = 0; 
+  
+  var queue = [root];//keeps track of nodes to visit 
+  var current; //keeps track of the current node that we are traversing
+// while loop keeps traversing nodes until there are no more nodes in the queue to traverse
+  while (queue.length != 0) {
+    current = queue.shift();
+    
+    var curConnected = graph[current];
+    var neighborIdx = []; //keeps track of all the nodes that are connected to the current node
+    var idx = curConnected.indexOf(1);// this gets the first node connected to the current node 
+    while (idx != -1) {
+      neighborIdx.push(idx); 
+      idx = curConnected.indexOf(1, idx + 1); // this line searches for the next connected node
+    }
+    //this loops through the current node and gets the distance
+    for (var j = 0; j < neighborIdx.length; j++) {
+      if (nodesLen[neighborIdx[j]] == Infinity) {
+        nodesLen[neighborIdx[j]] = nodesLen[current] + 1;
+        queue.push(neighborIdx[j]); 
+      }
+    }
+  }
+  return nodesLen;
+};
+
+var exBFSGraph = [
+  [0, 1, 1, 1, 0],
+  [0, 0, 1, 0, 0],
+  [1, 1, 0, 0, 0],
+  [0, 0, 0, 1, 0],
+  [0, 1, 0, 0, 0]
+];
+console.log(bfs(exBFSGraph, 1));
+</script>
+</body>
+</html>

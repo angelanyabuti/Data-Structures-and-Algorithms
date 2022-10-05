@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<body>
+<!--stacks-->
+<script>
+//functions push-placing data in to the stack, pop-removing the top element of a stack, peek-dispalying the top element of a stack, length/size-to determine the number of elements in a stack
+var letters = [] //This is our stack
+
+var word = "racecar" //this is a palindrome
+
+var rword = ""  //reversed word for our palindrome
+
+//put the letters of the word in to a stack
+for (var i=0; i < word.length; i++){
+	letters.push(word[i]);
+}
+//pop off the stack in reverse order
+for (var i=0; i<word.length; i++){
+	//we add one letter at a time from the stack by poping the top letter 
+	rword += letters.pop();
+}
+
+if(rword === word){
+	console.log(word+"is a palindrome")
+}
+else{
+	console.log(word+ "is not a palindrome")
+}
+
+//creates a stack
+var Stack = function() {
+	this.count = 0; //keeps count of how many items are in the stack
+	this.storage =  {};
+
+
+//Adds a value onto the end of the stack
+//we only add the value argument when we are pushing something.
+this.push=function(value){
+	this.storage[this.count]=value; //storage at the index this.count is the value
+	this.count++;
+}
+
+//removes and returns the value at the end of the stack
+this.pop = function(){
+	if (this.count ===0){
+		return undefined;
+	}
+	this.count--;
+	var result = this.storage[this.count];
+	delete this.storage[this.count];// removes  the value
+	return result;
+}
+this.size = function(){
+	return this.count; //the number of items in a stack
+}
+
+//returns the value at the end of the stack but does not remove it like pop
+this.peek = function() {
+	return this.storage[this.count-1]
+}
+}
+
+var myStack = new Stack();
+
+myStack.push(1);
+myStack.push(2);
+console.log(myStack.peek());//returns 2 but does not remove it
+console.log(myStack.pop());//returns 2 and removes it
+console.log(myStack.peek());//returns 1
+myStack.push("freeCodeCamp");
+console.log(myStack.size());
+console.log(myStack.peek());
+console.log(myStack.pop());
+console.log(myStack.peek());
+
+</script>
+</body>
+</html>
